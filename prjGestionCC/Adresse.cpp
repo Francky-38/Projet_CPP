@@ -18,7 +18,7 @@ Adresse::Adresse(string l, string c, unsigned long cp, string v)
 Adresse::~Adresse()
 {
     //dtor
-    cout << endl << "Destruction de ladresse : " << Getlib() << endl;
+    cout << endl << "Destruction de l'adresse : " << Getlib() << endl;
 }
 string Adresse::toString()
 {

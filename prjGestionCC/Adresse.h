@@ -1,10 +1,9 @@
 #ifndef ADRESSE_H
 #define ADRESSE_H
+
 #include <iostream>
 #include <sstream>
-
 using namespace std;
-
 
 class Adresse
 {
