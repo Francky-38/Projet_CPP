@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1619516129 source:c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\main.cpp
+	<iostream>
+	"Adresse.h"
+
+1619516454 c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\adresse.h
+	<iostream>
+	<sstream>
+
+1619516238 source:c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\adresse.cpp
+	"Adresse.h"
+
