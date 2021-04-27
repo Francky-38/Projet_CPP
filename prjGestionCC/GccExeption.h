@@ -3,17 +3,15 @@
 
 #include <iostream>
 #include <exception>
+
 using namespace std;
 
-/*
 enum class GccErreurs {
-    ERR_NOM=10,
+    ERR_NOM = 10,
     ERR_PRENOM = 20,
     ERR_MAIL = 30,
     ERR_SIRET = 40,
-    ERR_AUTRES = 50
 };
-*/
 
 class GccExeption: public exception
 {
@@ -22,6 +20,7 @@ class GccExeption: public exception
     public:
         GccExeption(string msg) throw();
         GccExeption(int) throw();
+        GccExeption(GccErreurs) throw();
         ~GccExeption() throw();
 
         /*virtual*/ const char* what() const throw() override ;

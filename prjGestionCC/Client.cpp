@@ -23,7 +23,7 @@ Client::~Client()
 }
 string Client::toString()
 {
-ostringstream oss;
+    ostringstream oss;
     oss << "Client : id " << GetID() <<
            " | nom " << Getnom() <<
            " | "  << GetadresseP()->toString() <<
@@ -36,7 +36,7 @@ void Client::Setnom(string n)
     if (strlen(n.c_str())<=50)
         nom=n;
     else
-        throw GccExeption(10);
+        throw GccExeption(GccErreurs::ERR_NOM);
 }
 
 void Client::Setmail(string m)

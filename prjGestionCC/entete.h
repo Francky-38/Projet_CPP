@@ -6,6 +6,7 @@
 #include <exception>
 #include "Adresse.h"
 #include "Client.h"
+#include "Professionnel.h"
 #include "GccExeption.h"
 
 #include <algorithm>
@@ -14,5 +15,6 @@
 using namespace std;
 
 
+enum class Sexe{F=0,H=1};
 
 #endif // ENTETE_H_INCLUDED

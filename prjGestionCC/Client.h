@@ -3,10 +3,10 @@
 
 #include <iostream>
 #include <cstring>
+#include <algorithm>
 #include "Adresse.h"
 #include "GccExeption.h"
-#include <algorithm>
-//#include <functional>
+
 using namespace std;
 
 class Client
