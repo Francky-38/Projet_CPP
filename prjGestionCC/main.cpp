@@ -1,11 +1,14 @@
 #include "entete.h"
 
+//#include <algorithm>
+//#include <string>
+
 int main()
 {
-    Adresse a("12, rue des Oliviers","",94000,"CRETEIL");
+    Adresse a("12, rue des Oliviers","",94000,"CReteil");
     cout << a.toString() << endl;
 
-    Client c(1,"BETY",&a,"bety@gmail.com");
+    Client c(1,"Bety",&a,"bety@gmail.com");
     cout << c.toString() << endl;
 
     try
@@ -28,7 +31,18 @@ int main()
     Adresse a2("125, rue LaFayette","Digicode 1432",94120,"FONTENAY SOUS BOIS");
     Professionnel p(2,"AXA",&a2,"info@axa.fr", "12548795641122",Status::SARL,&a2);
     cout << endl << p.toString();
-    //cout << endl << "test Status " << test;
+
+    Date d(12,11,1985);
+    cout << endl << "Date d : " << d.toString();
+
+    Particulier par(2,"AXA",&a2,"info@axa.fr", &d,"Daniel",Sexe::M);
+    cout << endl << "Particulier par : " << par.toString();
+
+    Particulier par2(2,"AXA",&a2,"info@axa.fr", &d,"012345678901234",Sexe::M);
+    cout << endl << "Particulier par : " << par2.toString();
+
+    Professionnel p2(2,"AXA",&a2,"info@axa.fr", "01234567891234",Status::SARL,&a2);
+    cout << endl << p2.toString();
 
     return 0;
 }

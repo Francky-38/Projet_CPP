@@ -5,7 +5,7 @@ Client::Client()
     //ctor
     SetID(0);
     Setnom("NC");
-    SetadresseP(new Adresse());
+    SetadresseP(nullptr);
     Setmail("NC");
 }
 Client::Client(unsigned int id, string n, Adresse* a, string m)

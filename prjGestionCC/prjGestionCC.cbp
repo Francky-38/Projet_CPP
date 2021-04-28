@@ -38,8 +38,14 @@
 		<Unit filename="Adresse.h" />
 		<Unit filename="Client.cpp" />
 		<Unit filename="Client.h" />
+		<Unit filename="Date.cpp" />
+		<Unit filename="Date.h" />
 		<Unit filename="GccExeption.cpp" />
 		<Unit filename="GccExeption.h" />
+		<Unit filename="Particulier.cpp" />
+		<Unit filename="Particulier.h" />
+		<Unit filename="Professionnel.cpp" />
+		<Unit filename="Professionnel.h" />
 		<Unit filename="entete.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>

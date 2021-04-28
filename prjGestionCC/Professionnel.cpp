@@ -5,7 +5,7 @@ Professionnel::Professionnel()
 {
     Setsiret("00000000000000");
     Setstatus(Status::NC);
-    SetadresseS(new Adresse());
+    SetadresseS(nullptr);
 }
 
 Professionnel::Professionnel(unsigned int id, string n, Adresse* adrP, string m,
@@ -27,9 +27,21 @@ string Professionnel::toString()
 {
     ostringstream oss;
     oss << Client::toString();
-    oss << " | ++ Données Pro : Siret " << Getsiret() <<
-           " | Statut " << Getstatus() <<
-           " | "  << GetadresseS()->toString();
+    oss << " | ++ Donnees Pro : Siret " << Getsiret() <<
+        " | Statut " << Getstatus() <<
+        " | "  << GetadresseS()->toString();
 
     return oss.str();
+}
+void Professionnel::Setsiret(string val)
+{
+    int qtNumeric = 0;
+    for(int i = 0; i < val.length(); ++i)
+    {
+        if (val[i]>='0' && val[i]<='9') qtNumeric++;
+    }
+    if (qtNumeric == 14 && val.length() == 14)
+        siret = val;
+    else
+        throw GccExeption(GccErreurs::ERR_SIRET);
 }

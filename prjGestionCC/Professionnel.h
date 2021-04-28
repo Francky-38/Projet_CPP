@@ -1,12 +1,8 @@
 #ifndef PROFESSIONNEL_H
 #define PROFESSIONNEL_H
 
-#include <iostream>
 #include <exception>
 #include "Client.h"
-#include "entete.h"
-
-using namespace std;
 
 enum class Status{SARL, SA, SAS, EURL, NC};
 
@@ -21,10 +17,7 @@ public:
     {
         return siret;
     }
-    void Setsiret(string val)
-    {
-        siret = val;
-    }
+    void Setsiret(string val);
     string Getstatus()
     {
         switch  (status)
@@ -59,7 +52,7 @@ public:
         adresseS = val;
     }
 
-    string toString();
+    /*virtual*/ string toString() override;
 
 protected:
 
