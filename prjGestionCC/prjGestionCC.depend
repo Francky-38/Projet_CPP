@@ -1,6 +1,7 @@
 # depslib dependency file v1.0
-1619610817 source:c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\main.cpp
+1619692447 source:c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\main.cpp
 	"entete.h"
+	<vector>
 
 1619597985 c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\adresse.h
 	<iostream>
@@ -9,10 +10,10 @@
 1619517345 source:c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\adresse.cpp
 	"Adresse.h"
 
-1619533031 source:c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\gccexeption.cpp
+1619681892 source:c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\gccexeption.cpp
 	"GccExeption.h"
 
-1619534472 c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\gccexeption.h
+1619681811 c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\gccexeption.h
 	<iostream>
 	<exception>
 
@@ -25,8 +26,13 @@
 1619599673 source:c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\client.cpp
 	"Client.h"
 
-1619610241 c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\entete.h
+1619691120 c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\entete.h
 	<iostream>
+	<fstream>
+	<sstream>
+	<vector>
+	<stdio.h>
+	<ctime>
 	"Adresse.h"
 	"Client.h"
 	"Professionnel.h"
@@ -34,10 +40,10 @@
 	"GccExeption.h"
 	"Date.h"
 
-1619612221 source:c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\professionnel.cpp
+1619612521 source:c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\professionnel.cpp
 	"Professionnel.h"
 
-1619611567 c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\professionnel.h
+1619684301 c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\professionnel.h
 	<exception>
 	"Client.h"
 

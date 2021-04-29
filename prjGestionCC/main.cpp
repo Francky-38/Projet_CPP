@@ -3,8 +3,29 @@
 //#include <algorithm>
 //#include <string>
 
+#include <vector>
+
+typedef struct
+{
+    string noCompte;
+    float retrait;
+    float depot;
+    float cb;
+
+    void init(string no)
+    {
+        noCompte = no;
+        retrait = depot = cb = 0;
+    }
+
+} S_Transac;
+
+void split(const string&, char, vector<string>&);
+void transac(S_Transac);
+
 int main()
 {
+    /*
     Adresse a("12, rue des Oliviers","",94000,"CReteil");
     cout << a.toString() << endl;
 
@@ -43,6 +64,75 @@ int main()
 
     Professionnel p2(2,"AXA",&a2,"info@axa.fr", "01234567891234",Status::SARL,&a2);
     cout << endl << p2.toString();
+    */
+
+    ifstream fichier("Operations.txt");
+
+    S_Transac tCompte;
+    tCompte.init("NC");
+
+    if(fichier)
+    {
+        string ligne;
+        while(getline(fichier, ligne))
+        {
+            vector<string> infoLigne;
+            split(ligne,';',infoLigne);
+            if (tCompte.noCompte == "NC") tCompte.noCompte = infoLigne.at(0);
+            if (tCompte.noCompte != infoLigne.at(0))
+            {
+                transac(tCompte);
+                tCompte.init(infoLigne.at(0));
+            }
+
+            switch  (stoi(infoLigne.at(2)))
+            {
+            case 1:
+                tCompte.retrait+=stof(infoLigne.at(3));
+                break;
+            case 2:
+                tCompte.cb+=stof(infoLigne.at(3));
+                break;
+            case 3:
+                tCompte.depot+=stof(infoLigne.at(3));
+                break;
+            }
+
+            cout << ligne << endl;
+        }
+        transac(tCompte);
+    }
+    else
+    {
+        throw GccExeption(GccErreurs::ERR_OPEN_FILE);
+    }
+
+//    struct tm tm;
+//	char *str="2009-11-19 13:33:47.51";
+//
+//	strptime(str,"%Y-%m-%d %H:%M:%S", &tm);
+//	printf("%d/%d/%d %d:%d:%d\n", tm.tm_year+1900, tm.tm_mon+1, tm.tm_mday,
+//                                  tm.tm_hour, tm.tm_min, tm.tm_sec);
 
     return 0;
+}
+
+void split(const string &chaine, char delimiteur, vector<string>& elements)
+{
+    stringstream ss(chaine);
+    string sousChaine;
+    while (getline(ss, sousChaine, delimiteur))
+    {
+        elements.push_back(sousChaine);
+    }
+}
+void transac(S_Transac tr)
+{
+    cout << "---------------" << endl;
+    cout << "--- Compte : " << tr.noCompte << endl;
+    cout << "     - retrait : " << tr.retrait << endl;
+    cout << "     - depot   : " << tr.depot << endl;
+    cout << "     - CB      : " << tr.cb << endl;
+    cout << "     ==> transaction : " << tr.depot - tr.retrait - tr.cb << endl;
+    cout << "---------------" << endl;
 }

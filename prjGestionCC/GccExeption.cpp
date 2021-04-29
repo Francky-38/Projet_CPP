@@ -21,6 +21,9 @@ GccExeption::GccExeption(int codeErr) throw()
         case 40:
             message = "Siret Invalide ! le siret doit avoir 14 chiffres";
             break;
+        case 50:
+            message = "Impossible d'ouvrir le fichier en lecture !";
+            break;
         default:
             message = "Autre Erreur Non gérée !!!";
             break;
@@ -41,6 +44,9 @@ GccExeption::GccExeption(GccErreurs codeErr) throw()
             break;
         case GccErreurs::ERR_SIRET:
             message = "Siret Invalide ! le siret doit avoir 14 chiffres";
+            break;
+        case GccErreurs::ERR_OPEN_FILE:
+            message = "Impossible d'ouvrir le fichier en lecture !";
             break;
         default:
             message = "Autre Erreur Non gérée !!!";

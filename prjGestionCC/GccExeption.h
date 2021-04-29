@@ -11,6 +11,7 @@ enum class GccErreurs {
     ERR_PRENOM = 20,
     ERR_MAIL = 30,
     ERR_SIRET = 40,
+    ERR_OPEN_FILE = 50,
 };
 
 class GccExeption: public exception
