@@ -31,6 +31,14 @@ string Particulier::Getprenom()
     //transform(str.begin(), str.begin()+1,str.begin(), ::toupper);
     return str;
 }
+
+void Particulier::Setprenom(string n)
+{
+    if (strlen(n.c_str())<=50)
+        prenom=n;
+    else
+        throw GccExeption(GccErreurs::ERR_PRENOM);
+}
 string Particulier::toString()
 {
     ostringstream oss;
@@ -43,17 +51,21 @@ string Particulier::toString()
     if (Client::GetadresseP()->Getcomplement()!="")
         oss << "    " << Client::GetadresseP()->Getcomplement()<<"\n";
     oss << "    " << Client::GetadresseP()->GetCP()<<" " << Client::GetadresseP()->Getville()<< "\n";
-    oss << "    " << "Ne le : " << Getnaissance()->toString()<< "\n";
 
-        //" | sexe "  << Getsexe() " | ++ Donnees Particulier : Naissance " << Getnaissance()->toString();
+    int age = 0;
+    time_t actuel = time(0);
+    tm *ltm = localtime(&actuel);
+    int aEc = 1900 + ltm->tm_year;
+    int mEc = 1 + ltm->tm_mon;
+    int jEc = ltm->tm_mday;
+
+    age = aEc - Getnaissance()->Getannee()-1;
+    if ((mEc > Getnaissance()->Getmois()) ||
+            ((mEc == Getnaissance()->Getmois()) && (jEc >= Getnaissance()->Getjour()))) age++;
+    oss << "    " << "Age : " << age;
+    if ((mEc == Getnaissance()->Getmois()) && (jEc == Getnaissance()->Getjour()))
+        oss << " et Bon Anniversaire !";
+    oss << "\n";
 
     return oss.str();
-}
-
-void Particulier::Setprenom(string n)
-{
-    if (strlen(n.c_str())<=50)
-        prenom=n;
-    else
-        throw GccExeption(GccErreurs::ERR_PRENOM);
 }

@@ -5,7 +5,7 @@
 #include <cstring>
 #include "Client.h"
 #include "Date.h"
-
+#include <ctime>
 
 enum class Sexe {F=0,M=1,I=2}; // I= indererminé
 
