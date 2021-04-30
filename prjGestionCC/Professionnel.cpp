@@ -22,16 +22,6 @@ Professionnel::~Professionnel()
     cout << endl << "Destruction du professionnel : " << Getnom() << endl;
 }
 
-string Professionnel::toString()
-{
-    ostringstream oss;
-    oss << Client::toString();
-    oss << " | ++ Donnees Pro : Siret " << Getsiret() <<
-        " | Statut " << Getstatus() <<
-        " | "  << GetadresseS()->toString();
-
-    return oss.str();
-}
 void Professionnel::Setsiret(string val)
 {
     int qtNumeric = 0;
@@ -43,4 +33,18 @@ void Professionnel::Setsiret(string val)
         siret = val;
     else
         throw GccExeption(GccErreurs::ERR_SIRET);
+}
+string Professionnel::toString()
+{
+    ostringstream oss;
+    oss << "\nProfessionnel : " << Client::GetID() << "\n\n";//Client::toString();
+    oss << "    Siret : " << Getsiret() << "\n";
+    oss << "    " << Getstatus() << " " << Client::Getnom() << "\n";
+    oss << "    " << GetadresseS() << "\n";
+    if (GetadresseS()->Getcomplement()!="")
+        oss << "    " << GetadresseS()->Getcomplement()<<"\n";
+    oss << "    " << GetadresseS()->GetCP()<<" " << GetadresseS()->Getville()<< "\n\n";
+    oss << "    Mail : " << Client::Getmail()<<"\n\n";
+
+    return oss.str();
 }

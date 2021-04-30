@@ -1,7 +1,8 @@
 # depslib dependency file v1.0
 210 <<<<<<< HEAD
 
-1619815239 source:c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\main.cpp
+1619821514 source:c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\main.cpp
+	"entete.h"
 
 1619804627 ort_transac
 	"entete.h"
@@ -47,7 +48,7 @@
 	"GccExeption.h"
 	"Date.h"
 
-1619801599 source:c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\professionnel.cpp
+1619822082 source:c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\professionnel.cpp
 	"Professionnel.h"
 
 1619684301 c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\professionnel.h

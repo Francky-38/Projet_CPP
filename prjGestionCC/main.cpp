@@ -61,14 +61,14 @@ int main()
     Professionnel p(2,"AXA",&a2,"info@axa.fr", "12548795641122",Status::SARL,&a2);
     cout << endl << p.toString();
 
-    Date d(12,11,1985);
+    Date d(01,05,1971);
     cout << endl << "Date d : " << d.toString();
 
     Particulier par(2,"AXA_par",&a2,"info@axa.fr", &d,"daNiel",Sexe::M);
     cout << endl << par.toString();
 
     Particulier par2(2,"AXA_par2",&a2,"info@axa.fr", &d,"012345678901234",Sexe::M);
-    cout << endl << "Particulier par : " << par2.toString();
+    cout << endl << par2.toString();
 
     Professionnel p2(2,"AXA_P2",&a2,"info@axa.fr", "01234567891234",Status::SARL,&a2);
     cout << endl << p2.toString();
