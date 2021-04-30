@@ -2,8 +2,10 @@
 #define PARTICULIER_H
 
 #include <exception>
+#include <cstring>
 #include "Client.h"
 #include "Date.h"
+
 
 enum class Sexe {F=0,M=1,I=2}; // I= indererminé
 

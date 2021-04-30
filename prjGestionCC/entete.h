@@ -7,12 +7,9 @@
 #include <vector>
 #include <stdio.h>
 #include <ctime>
-//#include <cstring>
-//#include <exception>
-//#include <cctype>
-//#include <sstream>
-//#include <algorithm>
-//#include <functional>
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #include "Adresse.h"
 #include "Client.h"
@@ -20,6 +17,36 @@
 #include "Particulier.h"
 #include "GccExeption.h"
 #include "Date.h"
+
 using namespace std;
 
+typedef struct
+{
+    string noCompte;
+    float retrait;
+    float depot;
+    float cb;
+
+    void init(string no)
+    {
+        noCompte = no;
+        retrait = depot = cb = 0;
+    }
+
+} S_Transac;
+
+void split(const string&, char, vector<string>&);
+void transac(S_Transac);
+
 #endif // ENTETE_H_INCLUDED
+
+
+//#include <comutil.h>
+//#include <iomanip>
+
+//#include <cstring>
+//#include <exception>
+//#include <cctype>
+//#include <sstream>
+//#include <algorithm>
+//#include <functional>

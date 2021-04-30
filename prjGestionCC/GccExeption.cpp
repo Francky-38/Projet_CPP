@@ -24,6 +24,9 @@ GccExeption::GccExeption(int codeErr) throw()
         case 50:
             message = "Impossible d'ouvrir le fichier en lecture !";
             break;
+        case 60:
+            message = "Date inexistante !";
+            break;
         default:
             message = "Autre Erreur Non gérée !!!";
             break;
@@ -47,6 +50,9 @@ GccExeption::GccExeption(GccErreurs codeErr) throw()
             break;
         case GccErreurs::ERR_OPEN_FILE:
             message = "Impossible d'ouvrir le fichier en lecture !";
+            break;
+        case GccErreurs::ERR_DATE:
+            message = "Date inexistante !";
             break;
         default:
             message = "Autre Erreur Non gérée !!!";

@@ -40,6 +40,7 @@
 		<Unit filename="Client.h" />
 		<Unit filename="Date.cpp" />
 		<Unit filename="Date.h" />
+		<Unit filename="Fonctions.cpp" />
 		<Unit filename="GccExeption.cpp" />
 		<Unit filename="GccExeption.h" />
 		<Unit filename="Particulier.cpp" />

@@ -28,7 +28,7 @@ public:
     string Getnom()
     {
         string str = nom;
-        for (auto & c: str) c = toupper(c);
+        for (char &c: str) c = toupper(c);
         return str;
     }
     void Setnom(string val) ;

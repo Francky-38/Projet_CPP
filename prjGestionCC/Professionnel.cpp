@@ -20,7 +20,6 @@ Professionnel::Professionnel(unsigned int id, string n, Adresse* adrP, string m,
 Professionnel::~Professionnel()
 {
     cout << endl << "Destruction du professionnel : " << Getnom() << endl;
-    delete GetadresseS();
 }
 
 string Professionnel::toString()
