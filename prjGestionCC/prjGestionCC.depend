@@ -1,6 +1,11 @@
 # depslib dependency file v1.0
-1619817804 source:c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\main.cpp
+210 <<<<<<< HEAD
+
+1619815239 source:c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\main.cpp
+
+1619804627 ort_transac
 	"entete.h"
+	"Particulier.h"
 
 1619597985 c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\adresse.h
 	<iostream>
@@ -49,10 +54,12 @@
 	<exception>
 	"Client.h"
 
-1619817845 source:c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\particulier.cpp
+1619684301 D
+
+1619819021 source:c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\particulier.cpp
 	"Particulier.h"
 
-1619816171 c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\particulier.h
+1619819021 c:\users\franc\desktop\projet cpp\gestion_comptes_clients\projet_cpp\prjgestioncc\particulier.h
 	<exception>
 	<cstring>
 	"Client.h"
