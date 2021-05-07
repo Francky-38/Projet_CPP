@@ -1,0 +1,12 @@
+debug/Adresse.o
+debug/Client.o
+debug/Date.o
+debug/Fonctions.o
+debug/GccExeption.o
+debug/Listeclients.o
+debug/Particulier.o
+debug/Professionnel.o
+debug/main.o
+debug/Mainwindow.o
+debug/moc_Listeclients.o
+debug/moc_Mainwindow.o
