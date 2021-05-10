@@ -3,6 +3,7 @@
 
 #include <cstring>
 #include <algorithm>
+#include <QString>
 #include "Adresse.h"
 #include "GccExeption.h"
 
@@ -13,23 +14,23 @@ public:
     Client(unsigned int,string,Adresse*,string);
     virtual ~Client();
 
-    string GetID()
+    QString GetID()
     {
         ostringstream oss;
         oss.width(5);
         oss.fill('0');
         oss << ID;
-        return oss.str();
+        return QString::fromStdString(oss.str());
     }
     void SetID(unsigned int val)
     {
         ID = val;
     }
-    string Getnom()
+    QString Getnom()
     {
         string str = nom;
         for (char &c: str) c = toupper(c);
-        return str;
+        return QString::fromStdString(str);
     }
     void Setnom(string val) ;
     Adresse* GetadresseP()
@@ -40,13 +41,13 @@ public:
     {
         adresseP = val;
     }
-    string Getmail()
+    QString Getmail()
     {
-        return mail;
+        return QString::fromStdString(mail);
     }
     void Setmail(string val) ;
 
-    string virtual toString();
+    QString virtual toString();
 protected:
 
 private:

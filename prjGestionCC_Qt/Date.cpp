@@ -23,14 +23,13 @@ Date::Date(const Date& cpDate)
 
 Date::~Date()
 {
-    cout << endl << "Destruction de la date : " << toString() << endl;
+    //cout << endl << "Destruction de la date : ";// << toString() << endl;
 }
-string Date::toString()
+QString Date::toString()
 {
-    ostringstream oss;
-    oss << Getjour() << "/" << Getmois() << "/" << Getannee();
-
-    return oss.str();
+    QString oss;
+    oss = QString::number(Getjour()) + "/" + Getmois() + "/" + Getannee();
+    return oss;
 }
 
 

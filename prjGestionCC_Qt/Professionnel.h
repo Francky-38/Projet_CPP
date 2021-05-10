@@ -13,12 +13,12 @@ public:
     Professionnel(unsigned int,string,Adresse*,string,string,Status,Adresse*);
     virtual ~Professionnel();
 
-    string Getsiret()
+    QString Getsiret()
     {
-        return siret;
+        return QString::fromStdString(siret);
     }
     void Setsiret(string val);
-    string Getstatus()
+    QString Getstatus()
     {
         switch  (status)
         {
@@ -52,7 +52,7 @@ public:
         adresseS = val;
     }
 
-    /*virtual*/ string toString() override;
+    /*virtual*/ QString toString() override;
 
 protected:
 

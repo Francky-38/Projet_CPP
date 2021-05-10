@@ -1,6 +1,7 @@
 #ifndef DATE_H
 #define DATE_H
 
+#include <QString>
 #include <iostream>
 #include <sstream>
 #include "GccExeption.h"
@@ -46,7 +47,7 @@ public:
         annee = a;
     }
 
-    string toString();
+    QString toString();
 
     static int fct_ValidDate(int pjour,int pmois,int pannee);
 

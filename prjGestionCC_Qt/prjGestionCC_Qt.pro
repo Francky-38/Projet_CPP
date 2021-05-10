@@ -1,4 +1,5 @@
 QT       += core gui
+QT       += sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -14,7 +15,6 @@ SOURCES += \
     Date.cpp \
     Fonctions.cpp \
     GccExeption.cpp \
-    Listeclients.cpp \
     Particulier.cpp \
     Professionnel.cpp \
     main.cpp \
@@ -25,14 +25,12 @@ HEADERS += \
     Client.h \
     Date.h \
     GccExeption.h \
-    Listeclients.h \
     Mainwindow.h \
     Particulier.h \
     Professionnel.h \
     entete.h
 
 FORMS += \
-    Listeclients.ui \
     Mainwindow.ui
 
 # Default rules for deployment.

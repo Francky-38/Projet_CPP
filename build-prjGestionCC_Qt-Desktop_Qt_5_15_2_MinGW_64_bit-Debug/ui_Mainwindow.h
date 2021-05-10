@@ -10,11 +10,16 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
-#include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTableView>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -22,42 +27,61 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
+    QAction *action_Import_Op_rations;
     QWidget *centralwidget;
-    QPushButton *bpLstClient;
-    QPushButton *bpLstClient_2;
-    QPushButton *bpLstClient_3;
+    QTableView *tblClients;
+    QRadioButton *rbPar;
+    QRadioButton *rbPro;
+    QRadioButton *rbTt;
+    QLabel *labDetail;
+    QLabel *labCpt;
     QMenuBar *menubar;
+    QMenu *menuFichier;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(800, 600);
+        MainWindow->resize(1024, 600);
+        action_Import_Op_rations = new QAction(MainWindow);
+        action_Import_Op_rations->setObjectName(QString::fromUtf8("action_Import_Op_rations"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        bpLstClient = new QPushButton(centralwidget);
-        bpLstClient->setObjectName(QString::fromUtf8("bpLstClient"));
-        bpLstClient->setGeometry(QRect(190, 110, 411, 71));
-        QFont font;
-        font.setPointSize(21);
-        bpLstClient->setFont(font);
-        bpLstClient_2 = new QPushButton(centralwidget);
-        bpLstClient_2->setObjectName(QString::fromUtf8("bpLstClient_2"));
-        bpLstClient_2->setGeometry(QRect(190, 200, 411, 71));
-        bpLstClient_2->setFont(font);
-        bpLstClient_3 = new QPushButton(centralwidget);
-        bpLstClient_3->setObjectName(QString::fromUtf8("bpLstClient_3"));
-        bpLstClient_3->setGeometry(QRect(190, 290, 411, 71));
-        bpLstClient_3->setFont(font);
+        tblClients = new QTableView(centralwidget);
+        tblClients->setObjectName(QString::fromUtf8("tblClients"));
+        tblClients->setGeometry(QRect(10, 50, 421, 501));
+        rbPar = new QRadioButton(centralwidget);
+        rbPar->setObjectName(QString::fromUtf8("rbPar"));
+        rbPar->setGeometry(QRect(30, 30, 82, 17));
+        rbPar->setChecked(false);
+        rbPro = new QRadioButton(centralwidget);
+        rbPro->setObjectName(QString::fromUtf8("rbPro"));
+        rbPro->setGeometry(QRect(130, 30, 82, 17));
+        rbPro->setChecked(true);
+        rbTt = new QRadioButton(centralwidget);
+        rbTt->setObjectName(QString::fromUtf8("rbTt"));
+        rbTt->setGeometry(QRect(270, 30, 82, 17));
+        rbTt->setChecked(false);
+        labDetail = new QLabel(centralwidget);
+        labDetail->setObjectName(QString::fromUtf8("labDetail"));
+        labDetail->setGeometry(QRect(450, 50, 241, 171));
+        labCpt = new QLabel(centralwidget);
+        labCpt->setObjectName(QString::fromUtf8("labCpt"));
+        labCpt->setGeometry(QRect(450, 260, 551, 111));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 800, 21));
+        menubar->setGeometry(QRect(0, 0, 1024, 21));
+        menuFichier = new QMenu(menubar);
+        menuFichier->setObjectName(QString::fromUtf8("menuFichier"));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         MainWindow->setStatusBar(statusbar);
+
+        menubar->addAction(menuFichier->menuAction());
+        menuFichier->addAction(action_Import_Op_rations);
 
         retranslateUi(MainWindow);
 
@@ -67,9 +91,13 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Gestion compte (Menu principal)", nullptr));
-        bpLstClient->setText(QCoreApplication::translate("MainWindow", "Liste des clients", nullptr));
-        bpLstClient_2->setText(QCoreApplication::translate("MainWindow", "Consulter les comptes", nullptr));
-        bpLstClient_3->setText(QCoreApplication::translate("MainWindow", "Importation des op\303\251rations", nullptr));
+        action_Import_Op_rations->setText(QCoreApplication::translate("MainWindow", "&Import_Op\303\251rations", nullptr));
+        rbPar->setText(QCoreApplication::translate("MainWindow", "Particuliers", nullptr));
+        rbPro->setText(QCoreApplication::translate("MainWindow", "Professionnels", nullptr));
+        rbTt->setText(QCoreApplication::translate("MainWindow", "Tous", nullptr));
+        labDetail->setText(QString());
+        labCpt->setText(QString());
+        menuFichier->setTitle(QCoreApplication::translate("MainWindow", "Fichier", nullptr));
     } // retranslateUi
 
 };

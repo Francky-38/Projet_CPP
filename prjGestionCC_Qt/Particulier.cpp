@@ -19,17 +19,17 @@ Particulier::Particulier(unsigned int id, string nom, Adresse* adrP, string m,
 
 Particulier::~Particulier()
 {
-    cout << endl << "Destruction du particulier : " << Getprenom() << endl;
+    //cout << endl << "Destruction du particulier ";// << Getprenom() << endl;
     delete Getnaissance();
 }
 
-string Particulier::Getprenom()
+QString Particulier::Getprenom()
 {
     string str = prenom;
     for (auto & c: str) c = tolower(c);
     str[0]=toupper(str[0]);
     //transform(str.begin(), str.begin()+1,str.begin(), ::toupper);
-    return str;
+    return QString::fromStdString(str);
 }
 
 void Particulier::Setprenom(string n)
@@ -39,18 +39,18 @@ void Particulier::Setprenom(string n)
     else
         throw GccExeption(GccErreurs::ERR_PRENOM);
 }
-string Particulier::toString()
+QString Particulier::toString()
 {
-    ostringstream oss;
-    oss << "\nParticulier : " << Client::GetID() << "\n\n";//Client::toString();
+    QString oss;
+    oss = "\nParticulier : " + Client::GetID() + "\n\n";//Client::toString();
     if (Getsexe()=='M')
-        oss << "    M. ";
+        oss += "    M. ";
     else
-        oss << "    Mme. ";
-    oss << Client::Getnom() << " " << Getprenom() << "\n    " << Client::GetadresseP()->Getlib()<<"\n";
+        oss += "    Mme. ";
+    oss += Client::Getnom() + " " + Getprenom() + "\n    " + Client::GetadresseP()->Getlib() + "\n";
     if (Client::GetadresseP()->Getcomplement()!="")
-        oss << "    " << Client::GetadresseP()->Getcomplement()<<"\n";
-    oss << "    " << Client::GetadresseP()->GetCP()<<" " << Client::GetadresseP()->Getville()<< "\n";
+        oss += "    " + Client::GetadresseP()->Getcomplement() + "\n";
+    oss += "    " + QString::number(Client::GetadresseP()->GetCP()) + " " + Client::GetadresseP()->Getville() + "\n";
 
     int age = 0;
     time_t actuel = time(0);
@@ -62,10 +62,9 @@ string Particulier::toString()
     age = aEc - Getnaissance()->Getannee()-1;
     if ((mEc > Getnaissance()->Getmois()) ||
             ((mEc == Getnaissance()->Getmois()) && (jEc >= Getnaissance()->Getjour()))) age++;
-    oss << "    " << "Age : " << age;
+    oss += "    Age : " + QString::number(age);
     if ((mEc == Getnaissance()->Getmois()) && (jEc == Getnaissance()->Getjour()))
-        oss << " et Bon Anniversaire !";
-    oss << "\n";
-
-    return oss.str();
+        oss += " et Bon Anniversaire !";
+    oss += "\n";
+    return oss;
 }

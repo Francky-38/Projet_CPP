@@ -1,7 +1,34 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "Date.h"
+#include "Client.h"
+#include "Professionnel.h"
+#include "Particulier.h"
+
 #include <QMainWindow>
+#include <QMap>
+#include <QtDebug>
+#include <QStandardItemModel>
+#include <fstream>
+
+#include <QDateTime>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlTableModel>
+
+typedef struct
+{
+    QString noCompte;
+    float retrait;
+    float depot;
+    float cb;
+    void init(QString no)
+    {
+        noCompte = no;
+        retrait = depot = cb = 0;
+    }
+} S_Transac;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -16,8 +43,21 @@ public:
     ~MainWindow();
 
 private slots:
+    void rempliTblClients(void);
+    void test(void);
+
+    void on_tblClients_doubleClicked(const QModelIndex &index);
+
+    void on_action_Import_Op_rations_triggered();
 
 private:
     Ui::MainWindow *ui;
+    QStandardItemModel *myModel;
+    QMap<int, Client*> mesClients;
+    void initMainWindow();
+    int a;
+    void split(const string&, char, vector<string>&);
+    void transac(S_Transac);
+    QSqlDatabase db;
 };
 #endif // MAINWINDOW_H

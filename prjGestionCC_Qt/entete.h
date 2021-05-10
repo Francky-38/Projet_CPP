@@ -26,21 +26,6 @@
 
 using namespace std;
 
-typedef struct transac
-{
-    string noCompte;
-    float retrait;
-    float depot;
-    float cb;
-
-    void init(string no)
-    {
-        noCompte = no;
-        retrait = depot = cb = 0;
-    }
-
-} S_Transac;
-
 void split(const string&, char, vector<string>&);
 void transac(S_Transac);
 

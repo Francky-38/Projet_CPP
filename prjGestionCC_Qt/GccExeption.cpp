@@ -62,7 +62,7 @@ GccExeption::GccExeption(GccErreurs codeErr) throw()
 
 GccExeption::~GccExeption()throw()
 {
-     cout << endl << "Destruction GccException";
+     //cout << endl << "Destruction GccException";
 }
 
 const char* GccExeption::what() const throw()

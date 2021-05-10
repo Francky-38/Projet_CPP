@@ -19,13 +19,13 @@ Professionnel::Professionnel(unsigned int id, string n, Adresse* adrP, string m,
 
 Professionnel::~Professionnel()
 {
-    cout << endl << "Destruction du professionnel : " << Getnom() << endl;
+    //cout << endl << "Destruction du professionnel";// << Getnom() << endl;
 }
 
 void Professionnel::Setsiret(string val)
 {
     int qtNumeric = 0;
-    for(int i = 0; i < val.length(); ++i)
+    for(unsigned long i = 0; i < val.length(); ++i)
     {
         if (val[i]>='0' && val[i]<='9') qtNumeric++;
     }
@@ -34,17 +34,17 @@ void Professionnel::Setsiret(string val)
     else
         throw GccExeption(GccErreurs::ERR_SIRET);
 }
-string Professionnel::toString()
+QString Professionnel::toString()
 {
-    ostringstream oss;
-    oss << "\nProfessionnel : " << Client::GetID() << "\n\n";//Client::toString();
-    oss << "    Siret : " << Getsiret() << "\n";
-    oss << "    " << Getstatus() << " " << Client::Getnom() << "\n";
-    oss << "    " << GetadresseS() << "\n";
+    QString oss;
+    oss = "\nProfessionnel : " + Client::GetID() + "\n\n";//Client::toString();
+    oss += "    Siret : " + Getsiret() + "\n";
+    oss += "    " + Getstatus() + " " + Client::Getnom() + "\n";
+    oss += "    " + GetadresseS()->Getlib() + "\n";
     if (GetadresseS()->Getcomplement()!="")
-        oss << "    " << GetadresseS()->Getcomplement()<<"\n";
-    oss << "    " << GetadresseS()->GetCP()<<" " << GetadresseS()->Getville()<< "\n\n";
-    oss << "    Mail : " << Client::Getmail()<<"\n\n";
+        oss += "    " + GetadresseS()->Getcomplement()+"\n";
+    oss += "    " + QString::number(GetadresseS()->GetCP()) + " " + GetadresseS()->Getville() + "\n\n";
+    oss += "    Mail : " + Client::Getmail() + "\n\n";
 
-    return oss.str();
+    return oss;
 }

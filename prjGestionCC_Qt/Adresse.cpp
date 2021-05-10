@@ -18,14 +18,14 @@ Adresse::Adresse(string l, string c, unsigned long cp, string v)
 Adresse::~Adresse()
 {
     //dtor
-    cout << endl << "Destruction de l'adresse : " << Getlib() << endl;
+    //cout << endl << "Destruction de l'adresse : ";// << Getlib() << endl;
 }
-string Adresse::toString()
+QString Adresse::toString()
 {
-    ostringstream oss;
-    oss << "Adresse : " << Getlib() << " " <<
-                           Getcomplement() << " " <<
-                           GetCP() << " " <<
+    QString oss;
+    oss = "Adresse : " + Getlib() + " " +
+                           Getcomplement() + " " +
+                           GetCP() + " " +
                            Getville();
-    return oss.str();
+    return oss;
 }

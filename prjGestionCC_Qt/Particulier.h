@@ -24,22 +24,22 @@ public:
     {
         naissance = val;
     }
-    string Getprenom();
+    QString Getprenom();
 
     void Setprenom(string val);
 
-    char Getsexe()
+    QString Getsexe()
     {
         switch  (sexe)
         {
         case Sexe::M:
-            return 'M';
+            return "M";
             break;
         case Sexe::F:
-            return 'F';
+            return "F";
             break;
         default:
-            return 'I';
+            return "I";
             break;
         }
     }
@@ -48,7 +48,7 @@ public:
         sexe = val;
     }
 
-    string toString() override; //virtual
+    /*virtual*/QString toString() override; //virtual
 
 protected:
 

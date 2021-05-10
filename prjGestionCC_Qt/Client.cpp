@@ -18,7 +18,7 @@ Client::Client(unsigned int id, string n, Adresse* a, string m)
 Client::~Client()
 {
     //dtor
-    cout << endl << "Destruction du client : " << Getnom() << endl;
+    //cout << endl << "Destruction du client : ";// << Getnom() << endl;
 }
 void Client::Setnom(string n)
 {
@@ -40,13 +40,13 @@ void Client::Setmail(string m)
     else
         throw GccExeption(30);
 }
-string Client::toString()
+QString Client::toString()
 {
-    ostringstream oss;
-    oss << "Client : id " << GetID() <<
-        " | nom " << Getnom() <<
-        " | "  << GetadresseP()->toString() <<
-        " | mail " << Getmail() ;
+    QString oss;
+    oss = "Client : id " + GetID() +
+        " | nom " + Getnom() +
+        " | "  + GetadresseP()->toString() +
+        " | mail " + Getmail() ;
 
-    return oss.str();
+    return oss;
 }

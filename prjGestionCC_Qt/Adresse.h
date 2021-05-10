@@ -1,6 +1,7 @@
 #ifndef ADRESSE_H
 #define ADRESSE_H
 
+#include <QString>
 #include <iostream>
 #include <sstream>
 
@@ -14,17 +15,17 @@ public:
 
     ~Adresse();
 
-    string Getlib()
+    QString Getlib()
     {
-        return lib;
+        return QString::fromStdString(lib);
     }
     void Setlib(string val)
     {
         lib = val;
     }
-    string Getcomplement()
+    QString Getcomplement()
     {
-        return complement;
+        return QString::fromStdString(complement);
     }
     void Setcomplement(string val)
     {
@@ -38,18 +39,18 @@ public:
     {
         CP = val;
     }
-    string Getville()
+    QString Getville()
     {
         string str = ville;
         for (auto & c: str) c = toupper(c);
-        return str;
+        return QString::fromStdString(str);
     }
     void Setville(string val)
     {
         ville = val;
     }
 
-    string toString();
+    QString toString();
 protected:
 
 private:
