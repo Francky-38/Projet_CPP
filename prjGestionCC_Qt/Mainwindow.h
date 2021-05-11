@@ -46,12 +46,12 @@ public:
 private slots:
     void rempliTblClients(void);
     void test(void);
-
     void on_tblClients_doubleClicked(const QModelIndex &index);
-
     void on_action_Import_Op_rations_triggered();
-
     void on_pushButton_clicked();
+    void on_bpTri_clicked();
+
+    void on_txtNom_textChanged(const QString &arg1);
 
 private:
     Ui::MainWindow *ui;
@@ -63,5 +63,6 @@ private:
     void transac(S_Transac, QString *);
     QSqlDatabase db;
     Dialog *dlgRapImport;
+    QString lfNom;
 };
 #endif // MAINWINDOW_H

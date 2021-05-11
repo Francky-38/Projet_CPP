@@ -10,6 +10,7 @@ Dialog::Dialog(QString txt, QWidget *parent) :
     {
          ui->txtSort->setText(txt);
     }
+    this->setWindowTitle("Rapport d'importation des transactions");
 }
 
 Dialog::~Dialog()

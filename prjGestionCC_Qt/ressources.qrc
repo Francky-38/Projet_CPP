@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/styles">
+        <file>mesStyles.qss</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file>filtre.png</file>
+    </qresource>
+</RCC>

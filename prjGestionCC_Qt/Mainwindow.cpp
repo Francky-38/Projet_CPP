@@ -19,6 +19,8 @@ MainWindow::MainWindow(QWidget *parent)
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("GestionCC.db");
 
+    lfNom="";
+
     initMainWindow();
     //test();
 }
@@ -152,48 +154,52 @@ void MainWindow::rempliTblClients()
     Professionnel *proTransType;
     for(auto monClient:mesClients)
     {
-        parTransType = dynamic_cast<Particulier*>(monClient);
-        proTransType = dynamic_cast<Professionnel*>(monClient);
-        if (cas=="par")
+        //if (lfNom=="" || lfNom==monClient->Getnom())
+        if (lfNom=="" || monClient->Getnom().contains(lfNom))
         {
-            //Particulier
-            if (parTransType!=nullptr)
+            parTransType = dynamic_cast<Particulier*>(monClient);
+            proTransType = dynamic_cast<Professionnel*>(monClient);
+            if (cas=="par")
             {
-                myModel->setItem(li,0,new QStandardItem(parTransType->GetID()));
-                myModel->setItem(li,1,new QStandardItem(parTransType->Getsexe()));
-                myModel->setItem(li,2,new QStandardItem(parTransType->Getnom()));
-                myModel->setItem(li,3,new QStandardItem(parTransType->Getprenom()));
-                myModel->setItem(li,4,new QStandardItem(parTransType->Getmail()));
-                li++;
-            }
-        }else if (cas=="pro")
-        {
-            //Pro
-            if (proTransType!=nullptr)
+                //Particulier
+                if (parTransType!=nullptr)
+                {
+                    myModel->setItem(li,0,new QStandardItem(parTransType->GetID()));
+                    myModel->setItem(li,1,new QStandardItem(parTransType->Getsexe()));
+                    myModel->setItem(li,2,new QStandardItem(parTransType->Getnom()));
+                    myModel->setItem(li,3,new QStandardItem(parTransType->Getprenom()));
+                    myModel->setItem(li,4,new QStandardItem(parTransType->Getmail()));
+                    li++;
+                }
+            }else if (cas=="pro")
             {
-                myModel->setItem(li,0,new QStandardItem(proTransType->GetID()));
-                myModel->setItem(li,1,new QStandardItem(proTransType->Getstatus()));
-                myModel->setItem(li,2,new QStandardItem(proTransType->Getnom()));
-                myModel->setItem(li,3,new QStandardItem(proTransType->Getsiret()));
-                myModel->setItem(li,4,new QStandardItem(proTransType->Getmail()));
-                li++;
-            }
-        }else
-        {
-            // Autres cas ("tt")
-            myModel->setItem(li,0,new QStandardItem(monClient->GetID()));
-            myModel->setItem(li,2,new QStandardItem(monClient->Getnom()));
-            myModel->setItem(li,6,new QStandardItem(monClient->Getmail()));
-            if (parTransType!=nullptr)
-            {
-                myModel->setItem(li,1,new QStandardItem(parTransType->Getsexe()));
-                myModel->setItem(li,3,new QStandardItem(parTransType->Getprenom()));
+                //Pro
+                if (proTransType!=nullptr)
+                {
+                    myModel->setItem(li,0,new QStandardItem(proTransType->GetID()));
+                    myModel->setItem(li,1,new QStandardItem(proTransType->Getstatus()));
+                    myModel->setItem(li,2,new QStandardItem(proTransType->Getnom()));
+                    myModel->setItem(li,3,new QStandardItem(proTransType->Getsiret()));
+                    myModel->setItem(li,4,new QStandardItem(proTransType->Getmail()));
+                    li++;
+                }
             }else
             {
-                myModel->setItem(li,4,new QStandardItem(proTransType->Getstatus()));
-                myModel->setItem(li,5,new QStandardItem(proTransType->Getsiret()));
+                // Autres cas ("tt")
+                myModel->setItem(li,0,new QStandardItem(monClient->GetID()));
+                myModel->setItem(li,2,new QStandardItem(monClient->Getnom()));
+                myModel->setItem(li,6,new QStandardItem(monClient->Getmail()));
+                if (parTransType!=nullptr)
+                {
+                    myModel->setItem(li,1,new QStandardItem(parTransType->Getsexe()));
+                    myModel->setItem(li,3,new QStandardItem(parTransType->Getprenom()));
+                }else
+                {
+                    myModel->setItem(li,4,new QStandardItem(proTransType->Getstatus()));
+                    myModel->setItem(li,5,new QStandardItem(proTransType->Getsiret()));
+                }
+                li++;
             }
-            li++;
         }
     }
     // Entetes
@@ -224,7 +230,7 @@ void MainWindow::rempliTblClients()
 }
 
 void MainWindow::on_tblClients_doubleClicked(const QModelIndex &index)
-{
+    {
     int no =index.siblingAtColumn(0).data().toInt();
 
     // Met à jour le détail des données du client
@@ -246,12 +252,12 @@ void MainWindow::on_tblClients_doubleClicked(const QModelIndex &index)
             float decouv = query.value("decouvert").toFloat();
             int id = query.value("numcli").toInt();
 
-            QString ch = QString("Cpt N°%1 créé le %2, Solde %3 (%4), client %5")
+            QString ch = QString("Cpt %1 (%2) Solde ==> %3 (%4)")
                     .arg(noCpt)
                     .arg(dateCrea.toString("dd/MM/yyyy"))
                     .arg(solde)
-                    .arg(decouv)
-                    .arg(id);
+                    .arg(decouv);
+                    //.arg(id);
             txtCpt += ch + "\n";
         }
         ui->labCpt->setText(txtCpt);
@@ -259,10 +265,6 @@ void MainWindow::on_tblClients_doubleClicked(const QModelIndex &index)
     }else {
         ui->labCpt->setText("Erreur Connexion Base de Données !");
     }
-}
-void MainWindow::test()
-{
-    qDebug() << "Test";
 }
 
 void MainWindow::on_action_Import_Op_rations_triggered()
@@ -323,10 +325,28 @@ void MainWindow::on_action_Import_Op_rations_triggered()
     dlgRapImport = new Dialog(*rapImport, this);
 
     dlgRapImport->show();
+}
 
+void MainWindow::test()
+{
+    qDebug() << "Test";
 }
 
 void MainWindow::on_pushButton_clicked()
 {
     on_action_Import_Op_rations_triggered();
+}
+
+void MainWindow::on_bpTri_clicked()
+{
+    lfNom = ui->txtNom->text();
+    rempliTblClients();
+    lfNom ="";
+}
+
+void MainWindow::on_txtNom_textChanged(const QString &arg1)
+{
+    lfNom = ui->txtNom->text();
+    rempliTblClients();
+    lfNom ="";
 }
