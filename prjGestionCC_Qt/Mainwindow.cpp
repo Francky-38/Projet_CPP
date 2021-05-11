@@ -1,6 +1,8 @@
 #include "Mainwindow.h"
 #include "ui_Mainwindow.h"
 
+#include <QSettings>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -21,8 +23,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     lfNom="";
 
+    QSettings maConfig("parametres.ini", QSettings::IniFormat);
+    pathOperations = maConfig.value("pathOperations").toString();
+
     initMainWindow();
-    //test();
 }
 
 MainWindow::~MainWindow()
@@ -60,7 +64,7 @@ void MainWindow::initMainWindow()
     Adresse *a7 = new Adresse("25, rue de la Paix","",92100,"LA DEFENSE");
     Adresse *a9 = new Adresse("3, avenue des Parcs","",93500,"ROISSY EN France");
     Adresse *a11= new Adresse("3, rue Lecourbe","",93200,"BAGNOLET");
-    Date *d1 = new Date(12,11,1985);
+    Date *d1 = new Date(11,05,1985);
     Date *d3 = new Date(05,05,1965);
     Date *d5 = new Date(06,06,1977);
     Date *d7 = new Date(12,04,1977);
@@ -250,14 +254,12 @@ void MainWindow::on_tblClients_doubleClicked(const QModelIndex &index)
             QDateTime dateCrea = query.value("datecreation").toDateTime();
             float solde = query.value("solde").toString().replace(",",".").toFloat();
             float decouv = query.value("decouvert").toFloat();
-            int id = query.value("numcli").toInt();
 
             QString ch = QString("Cpt %1 (%2) Solde ==> %3 (%4)")
                     .arg(noCpt)
                     .arg(dateCrea.toString("dd/MM/yyyy"))
                     .arg(solde)
                     .arg(decouv);
-                    //.arg(id);
             txtCpt += ch + "\n";
         }
         ui->labCpt->setText(txtCpt);
@@ -269,7 +271,7 @@ void MainWindow::on_tblClients_doubleClicked(const QModelIndex &index)
 
 void MainWindow::on_action_Import_Op_rations_triggered()
 {
-    ifstream ficOpe("Operations.txt");
+    ifstream ficOpe(pathOperations.toStdString());
     ofstream ficAno("Anomalies.log");
 
     QString *rapImport = new QString("");
@@ -334,6 +336,8 @@ void MainWindow::test()
 
 void MainWindow::on_pushButton_clicked()
 {
+    ui->labDetail->setText("");
+    ui->labCpt->setText("");
     on_action_Import_Op_rations_triggered();
 }
 
@@ -346,7 +350,7 @@ void MainWindow::on_bpTri_clicked()
 
 void MainWindow::on_txtNom_textChanged(const QString &arg1)
 {
-    lfNom = ui->txtNom->text();
+    lfNom = arg1;//ui->txtNom->text();
     rempliTblClients();
     lfNom ="";
 }

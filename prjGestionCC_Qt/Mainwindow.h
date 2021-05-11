@@ -18,7 +18,7 @@
 #include <QSqlQuery>
 #include <QSqlTableModel>
 
-typedef struct
+typedef struct Transac
 {
     QString noCompte;
     float retrait;
@@ -50,7 +50,6 @@ private slots:
     void on_action_Import_Op_rations_triggered();
     void on_pushButton_clicked();
     void on_bpTri_clicked();
-
     void on_txtNom_textChanged(const QString &arg1);
 
 private:
@@ -64,5 +63,6 @@ private:
     QSqlDatabase db;
     Dialog *dlgRapImport;
     QString lfNom;
+    QString pathOperations;
 };
 #endif // MAINWINDOW_H
