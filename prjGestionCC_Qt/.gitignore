@@ -70,4 +70,7 @@ Thumbs.db
 # --------
 *.dll
 *.exe
-
+# Exclusion des dossiers
+/prjGestionCC_Qt/debug/*
+/prjGestionCC_Qt/release/*
+/prjGestionCC_Qt/image/*
