@@ -17,6 +17,7 @@ SOURCES += \
     GccExeption.cpp \
     Particulier.cpp \
     Professionnel.cpp \
+    dialog.cpp \
     main.cpp \
     Mainwindow.cpp
 
@@ -28,10 +29,12 @@ HEADERS += \
     Mainwindow.h \
     Particulier.h \
     Professionnel.h \
+    dialog.h \
     entete.h
 
 FORMS += \
-    Mainwindow.ui
+    Mainwindow.ui \
+    dialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

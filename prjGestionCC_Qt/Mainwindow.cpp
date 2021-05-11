@@ -27,6 +27,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete myModel;
+    if(dlgRapImport!= nullptr) delete dlgRapImport;
 }
 
 void MainWindow::initMainWindow()
@@ -95,14 +96,14 @@ void MainWindow::split(const string &chaine, char delimiteur, vector<string>& el
     }
 }
 
-void MainWindow::transac(S_Transac tr)
+void MainWindow::transac(S_Transac tr, QString *rapImport)
 {
-    qDebug() << "---------------";
-    qDebug() << "--- Compte : " << tr.noCompte;
-    qDebug() << "     - retrait : " << tr.retrait;
-    qDebug() << "     - depot   : " << tr.depot;
-    qDebug() << "     - CB      : " << tr.cb;
-    qDebug() << "     ==> transaction : " << tr.depot - tr.retrait - tr.cb;
+    *rapImport += "---------------\n";
+    *rapImport += "--- Compte : " + tr.noCompte + "\n";
+    *rapImport += "     - retrait : " + QString::number(tr.retrait) + "\n";
+    *rapImport += "     - depot   : " + QString::number(tr.depot) + "\n";
+    *rapImport += "     - CB      : " + QString::number(tr.cb) + "\n";
+    *rapImport += "     ==> transaction : " + QString::number(tr.depot - tr.retrait - tr.cb) + "\n";
 
     // Recherche du compte en base
     if (db.open())
@@ -115,26 +116,29 @@ void MainWindow::transac(S_Transac tr)
         {
             float solde = query.value("solde").toString().replace(",",".").toFloat();
             float decouv = query.value("decouvert").toFloat();
-            qDebug() << "     ==> solde : " << solde;
-            qDebug() << "     ==> découvert max : " << decouv;
+            *rapImport += "     ==> découvert max : " + QString::number(decouv) + "\n";
             float newSolde = solde + tr.depot - tr.retrait - tr.cb;
             if (newSolde < decouv)
             {
-                qDebug() << "   Transaction impossible !!! ";
+                *rapImport += "   Transaction impossible !!!\n";
+                *rapImport += "     ==> ancien solde : " + QString::number(solde) + "\n";
+                *rapImport += "     ==> nouveau solde : " + QString::number(solde) + "\n";
+
             }else{
                 // Requete mise à jour de la base
-                qDebug() << "   Transaction OK !!! ";
-                qDebug() << "     ==> nouveau solde : " << newSolde;
+                *rapImport += "   Transaction OK !!! \n";
+                *rapImport += "     ==> ancien solde : " + QString::number(solde) + "\n";
+                *rapImport += "     ==> nouveau solde : " + QString::number(newSolde) + "\n";
                 QString reqSQL = "UPDATE comptes SET solde = " + QString::number(newSolde) + " WHERE numcompte = " + tr.noCompte + ";";
                 QSqlQuery query(reqSQL, db);
             }
         }
-
         db.close();
     }else {
-        qDebug() << "Erreur Connexion Base de Données !";
+        *rapImport += "Erreur Connexion Base de Données !\n";
     }
-    qDebug() << "---------------";
+
+    //*rapImport += "---------------\n";
 }
 
 void MainWindow::rempliTblClients()
@@ -148,7 +152,6 @@ void MainWindow::rempliTblClients()
     Professionnel *proTransType;
     for(auto monClient:mesClients)
     {
-        qDebug() << monClient->toString();
         parTransType = dynamic_cast<Particulier*>(monClient);
         proTransType = dynamic_cast<Professionnel*>(monClient);
         if (cas=="par")
@@ -156,7 +159,6 @@ void MainWindow::rempliTblClients()
             //Particulier
             if (parTransType!=nullptr)
             {
-                //qDebug() << "cas par " + parTransType->Getprenom();
                 myModel->setItem(li,0,new QStandardItem(parTransType->GetID()));
                 myModel->setItem(li,1,new QStandardItem(parTransType->Getsexe()));
                 myModel->setItem(li,2,new QStandardItem(parTransType->Getnom()));
@@ -169,7 +171,6 @@ void MainWindow::rempliTblClients()
             //Pro
             if (proTransType!=nullptr)
             {
-                qDebug() << "cas pro " + proTransType->Getsiret();
                 myModel->setItem(li,0,new QStandardItem(proTransType->GetID()));
                 myModel->setItem(li,1,new QStandardItem(proTransType->Getstatus()));
                 myModel->setItem(li,2,new QStandardItem(proTransType->Getnom()));
@@ -185,12 +186,10 @@ void MainWindow::rempliTblClients()
             myModel->setItem(li,6,new QStandardItem(monClient->Getmail()));
             if (parTransType!=nullptr)
             {
-                //qDebug() << "cas tt (par) " + parTransType->Getprenom();
                 myModel->setItem(li,1,new QStandardItem(parTransType->Getsexe()));
                 myModel->setItem(li,3,new QStandardItem(parTransType->Getprenom()));
             }else
             {
-                //qDebug() << "cas tt (pro) " + proTransType->Getsiret();
                 myModel->setItem(li,4,new QStandardItem(proTransType->Getstatus()));
                 myModel->setItem(li,5,new QStandardItem(proTransType->Getsiret()));
             }
@@ -200,7 +199,6 @@ void MainWindow::rempliTblClients()
     // Entetes
     if (cas=="par")
     {
-        qDebug() << "entete par ";
         myModel->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
         myModel->setHeaderData(1, Qt::Horizontal, QObject::tr("Sexe"));
         myModel->setHeaderData(2, Qt::Horizontal, QObject::tr("Nom"));
@@ -208,7 +206,6 @@ void MainWindow::rempliTblClients()
         myModel->setHeaderData(4, Qt::Horizontal, QObject::tr("Mail"));
     }else if (cas=="pro")
     {
-        qDebug() << "entete pro ";
         myModel->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
         myModel->setHeaderData(1, Qt::Horizontal, QObject::tr("Status"));
         myModel->setHeaderData(2, Qt::Horizontal, QObject::tr("Nom"));
@@ -216,7 +213,6 @@ void MainWindow::rempliTblClients()
         myModel->setHeaderData(4, Qt::Horizontal, QObject::tr("Mail"));
     }else
     {
-        qDebug() << "entete tt ";
         myModel->setHeaderData(0, Qt::Horizontal, QObject::tr("ID"));
         myModel->setHeaderData(1, Qt::Horizontal, QObject::tr("Sexe"));
         myModel->setHeaderData(2, Qt::Horizontal, QObject::tr("Nom"));
@@ -261,7 +257,7 @@ void MainWindow::on_tblClients_doubleClicked(const QModelIndex &index)
         ui->labCpt->setText(txtCpt);
         db.close();
     }else {
-        qDebug() << "Erreur Connexion Base de Données !";
+        ui->labCpt->setText("Erreur Connexion Base de Données !");
     }
 }
 void MainWindow::test()
@@ -273,6 +269,9 @@ void MainWindow::on_action_Import_Op_rations_triggered()
 {
     ifstream ficOpe("Operations.txt");
     ofstream ficAno("Anomalies.log");
+
+    QString *rapImport = new QString("");
+
     if (!ficAno)
     {
         throw GccExeption(GccErreurs::ERR_OPEN_FILE);
@@ -292,7 +291,7 @@ void MainWindow::on_action_Import_Op_rations_triggered()
             if (tCompte.noCompte == "NC") tCompte.noCompte = QString::fromStdString(infoLigne.at(0));
             if (tCompte.noCompte != QString::fromStdString(infoLigne.at(0)))
             {
-                transac(tCompte);
+                transac(tCompte, rapImport);
                 tCompte.init(QString::fromStdString(infoLigne.at(0)));
             }
             switch  (stoi(infoLigne.at(2)))
@@ -312,7 +311,7 @@ void MainWindow::on_action_Import_Op_rations_triggered()
             }
             //cout << ligne << endl;
         }
-        transac(tCompte);
+        transac(tCompte, rapImport);
     }
     else
     {
@@ -321,4 +320,13 @@ void MainWindow::on_action_Import_Op_rations_triggered()
 
     ficAno.close();
 
+    dlgRapImport = new Dialog(*rapImport, this);
+
+    dlgRapImport->show();
+
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    on_action_Import_Op_rations_triggered();
 }

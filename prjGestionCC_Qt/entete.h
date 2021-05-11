@@ -23,14 +23,12 @@
 #include "GccExeption.h"
 #include "Date.h"
 
-
 using namespace std;
 
 void split(const string&, char, vector<string>&);
 void transac(S_Transac);
 
 #endif // ENTETE_H_INCLUDED
-
 
 //#include <comutil.h>
 //#include <iomanip>

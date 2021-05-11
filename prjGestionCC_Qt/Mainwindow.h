@@ -5,6 +5,7 @@
 #include "Client.h"
 #include "Professionnel.h"
 #include "Particulier.h"
+#include "dialog.h"
 
 #include <QMainWindow>
 #include <QMap>
@@ -50,6 +51,8 @@ private slots:
 
     void on_action_Import_Op_rations_triggered();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     QStandardItemModel *myModel;
@@ -57,7 +60,8 @@ private:
     void initMainWindow();
     int a;
     void split(const string&, char, vector<string>&);
-    void transac(S_Transac);
+    void transac(S_Transac, QString *);
     QSqlDatabase db;
+    Dialog *dlgRapImport;
 };
 #endif // MAINWINDOW_H
